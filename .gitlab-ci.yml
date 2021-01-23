@@ -1,0 +1,25 @@
+stages:
+  - deploy
+  - cleanup
+
+deploy_master:
+  stage: deploy
+  only:
+    - master
+  script:
+    - echo "$PSQL_SEC" > "$(pwd)/psql.env"
+    - echo "$EMAIL_SEC" > "$(pwd)/email.env"
+    - docker-compose up --build -d
+  variables:
+    GIT_CLONE_PATH: $CI_BUILDS_DIR/umg/master
+
+clean:
+  stage: cleanup
+  only:
+    - master
+  script:
+    - rm -rf $CI_BUILDS_DIR/umg
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+

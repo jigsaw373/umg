@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package umg;
+option go_package = "pb";
+
+// Domain Permission Request
+message DomPermReq {
+  string token = 1;
+  string domain = 2;
+  string action = 3;
+}
+
+// Product Permission Request
+message ProdPermReq {
+  string token = 1;
+  string domain = 2;
+  string product = 3;
+  string action = 4;
+}
+
+// Property Permission Request
+message PropertyPermReq {
+  string token = 1;
+  int64 id = 2;
+  string type = 3;
+}
+
+// Add product request message
+message AddProdReq {
+  string token = 1;
+  string domain = 2;
+  string product = 3;
+}
+
+// Remove product request message
+message RemProdReq {
+  string token = 1;
+  string domain = 2;
+  string product = 3;
+}
+
+// Add product response
+message AddProdRes {
+  bool done = 1;
+  string message = 2;
+}
+
+// Remove product response
+message RemProdRes {
+  bool done = 1;
+  string message = 2;
+}
+
+// Permission Response
+message PermRes {
+  bool has = 1;
+}
+
+// add property request
+message AddPropertyReq {
+  string token = 1;
+  int64 id = 2;
+  string type = 3;
+  string name = 4;
+}
+
+// add property response
+message AddPropertyRes {
+  bool done = 1;
+  string message = 2;
+}
+
+message RemPropertyReq {
+  string token = 1;
+  int64 id = 2;
+  string type = 3;
+}
+
+// remove property response
+message RemPropertyRes {
+  bool done = 1;
+  string message = 2;
+}
+
+service AuthService {
+  rpc HasDomPerm (DomPermReq) returns (PermRes);
+  rpc HasProdPerm (ProdPermReq) returns (PermRes);
+  rpc HasPropertyPerm (PropertyPermReq) returns (PermRes);
+
+  rpc AddProduct (AddProdReq) returns (AddProdRes);
+  rpc RemoveProduct (RemProdReq) returns (RemProdRes);
+
+  rpc AddProperty (AddPropertyReq) returns (AddPropertyRes);
+  rpc RemoveProperty (RemPropertyReq) returns (RemPropertyRes);
+}

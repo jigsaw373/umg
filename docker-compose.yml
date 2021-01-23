@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  umg:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: user_management
+    ports:
+      - '127.0.0.1:4000:4000'
+      - '50053:50053'
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - umg.env
+      - psql.env
+      - email.env
+  db:
+    image: postgres:12.1-alpine
+    container_name: user_management_db
+    restart: unless-stopped
+    volumes:
+      - /home/data/umg-data:/var/lib/postgresql/data/
+    env_file:
+      -  psql.env
+  redis:
+    image: redis:5.0.8
+    container_name: user_management_redis
+    restart: unless-stopped

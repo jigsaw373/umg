@@ -1,0 +1,1 @@
+protoc proto/umg.proto --go_out=plugins=grpc:.

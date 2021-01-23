@@ -1,0 +1,28 @@
+domains:
+  - name: pTrack
+    products:
+      - name: pTrack
+      - name: Data Science
+      - name: Demo
+  - name: Energy Monitoring
+    products:
+      - name: Energy Monitoring
+      - name: Demo
+  - name: Demo
+    products:
+      - name: Demo
+  - name: Demand Response
+    products:
+      - name: Demand Response
+      - name: Demo
+  - name: Monthly Peak
+    products:
+      - name: Monthly Peak
+      - name: Demo
+  - name: Bill Verification
+    products:
+      - name: Bill Verification
+  - name: Water
+    products:
+      - name: Alertlabs
+
